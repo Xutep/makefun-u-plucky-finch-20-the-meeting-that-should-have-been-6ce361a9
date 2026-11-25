@@ -30,6 +30,10 @@ def main() -> None:
         raise ValueError("entry must not be empty")
     if "\n" in line or "\r" in line:
         raise ValueError("entry must be a single line")
+    if line != JOKE.strip():
+        raise ValueError("entry must have no leading or trailing whitespace")
+    if any(ord(ch) < 32 for ch in line):
+        raise ValueError("entry must not contain control characters")
     if len(line) > MAX_CHARS:
         raise ValueError(
             "entry is %d characters, over the %d limit" % (len(line), MAX_CHARS)
